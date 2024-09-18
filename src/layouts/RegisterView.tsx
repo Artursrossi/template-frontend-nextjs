@@ -66,8 +66,7 @@ export function RegisterView() {
         credentials: 'include',
       })
       const { data } = registerResponse
-      if (!registerResponse.ok) throw new Error('Ocorreu um erro. Tente novamente mais tarde...')
-
+      
       if (data?.message && data?.message === 'Passwords Do Not Match') {
         setError('repeatPassword', { message: 'As senhas não coincidem' })
         return
@@ -76,6 +75,8 @@ export function RegisterView() {
         setError('email', { message: 'Email já existente' })
         return
       }
+
+      if (!registerResponse.ok) throw new Error('Ocorreu um erro. Tente novamente mais tarde...')
 
       toast.info('Conta criada com sucesso!')
       router.push('/login')
